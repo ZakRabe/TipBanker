@@ -1,0 +1,56 @@
+body {
+	background-color: #CCCCCC;
+}
+a {
+	display: block;
+	color: #862200;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+	color: 	#b32e00;
+}
+
+h2{
+ /* Makes text unselectable*/
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#billForm {
+	background-color: #A35731;
+}
+.box {
+	margin: 10px;
+	width: 300px;
+	position: relative;
+	display: none;
+}
+#rightBoxes{
+	float: right;
+	width: 300px;
+}
+
+.slider{
+	padding: 10px;
+	max-width: 280px;
+	width: 280px;
+	background-color: 	#0084b3;
+	border: 3px solid #000000;
+}
+#main {
+	float: right;
+	background-color: 	#496400;
+	width: 500px;
+	height: 500px;
+	display: block;
+}
+#forms{
+	width: 400px;
+	position: absolute;
+	top: 100px;
+	left: 40%;
+	background-color: red;
+}
