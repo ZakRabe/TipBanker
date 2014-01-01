@@ -1,65 +1,32 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<title>TipBanker</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
-<script type="text/javascript">
-
-</script>
+	<meta charset="utf-8">
+	<title>TipBanker</title>
 </head>
 <body>
-<header><h1>TipBanker</h1> <span id="balance">Balance</span> </header>
-
-
-
-
-<div id="rightBoxes">
-	<h2 onclick="toggle_visibility('billSlider')">Bills</h2>
-	<section class="slider" id="billSlider">
-		<div id="billContainer"></div>
-		<a href="#" onclick="toggle_visibility('billForm')">Add a Bill</a>
-	</section>
-	<h2 onclick="toggle_visibility('expenseSlider')">Expenses</h2>
-	<section class="slider" id="expenseSlider">
-		<div id="expenseContainer"></div>
-		<a href="#" onclick="toggle_visibility('expenseForm')">Add an Expense </a>
-	</section>
-</div>
-<div id="main">
-	<a href="#" onclick="toggle_visibility('depositForm')">Make a Deposit</a>
-	<div id="depositContainer"></div>
-</div>
-
-
-<div id="forms">
-	<div class="box" id="billForm">
-	<FORM NAME="billForm" ACTION="" METHOD="GET">Add a bill: <BR>
-	<INPUT TYPE="text" NAME="name" VALUE="">name<P>
-	<INPUT TYPE="text" NAME="amount" VALUE="">amount<P>
-	<INPUT TYPE="text" NAME="dueDate" >duedate<P>	
-	<INPUT TYPE="button" NAME="button" Value="Add to Bills" onClick="sendBill(this.form);toggle_visibility('billForm')">
-	</FORM>
+	<div id="container">
+		<header><h1>TipBanker</h1><div id="balance"></div></header>
+		<nav>
+			<ul>
+				<li onclick='inputSelect("deposit");'>Make a Deposit</li>
+				<li onclick='inputSelect("bill");'>Add a Bill</li>
+				<li onclick='inputSelect("expense");'>Add an Expense</li>
+			</ul>
+		</nav>
+		<section id="deposits"></section>
+		<section id="bills"></section>
+		<section id="expense"></section>
 	</div>
 
-	<div class="box" id ="expenseForm">
-	<FORM NAME="expenseForm" ACTION="" METHOD="GET">Add an expense: <BR>
-	<INPUT TYPE="text" NAME="amount" VALUE="">amount<P>
-	<INPUT TYPE="text" NAME="reason" VALUE="">reason<P>
-	<INPUT TYPE="text" NAME="date" >date<P>	
-	<INPUT TYPE="button" NAME="button" Value="Add to Expenses" onClick="sendExpense(this.form);toggle_visibility('expenseForm')">
-	</FORM>
+	<div id="input">
+		<form id="form" action="" method="GET">
+			<input type="hidden" name="type" value="">
+			<p><label>Label:<input type="text" name="text" value=""></label>
+			<p><label>Amount:<input type="text" name="amount" value=""></label>
+			<p><button onclick="logFromForm(this.form)">Bank it!</button>
+		</form>
 	</div>
-
-	<div class="box" id="depositForm">
-	<FORM NAME="depositForm" ACTION="" METHOD="GET">Make a deposit: <BR>
-	<INPUT TYPE="text" NAME="amount" VALUE="">amount<P>
-	<INPUT TYPE="text" NAME="date" >date<P>	
-	<INPUT TYPE="button" NAME="button" Value="Deposit" onClick="sendDeposit(this.form);toggle_visibility('depositForm')">
-	</FORM>
-	</div>
-</div>
-
 </body>
 <script type="text/javascript" src="bank.js"></script>
 </html>
