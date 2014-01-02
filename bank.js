@@ -1,4 +1,46 @@
 // Object functions
+// localStorage with objects! thanks dave! https://github.com/dparlevliet/html5-localStorage-db
+try {
+  'localStorage' in window && window['localStorage'] !== null;
+} catch (e) {
+  // fake it
+  window.localStorage = {
+    __store__: {},
+    setItem: function(key, value) {
+      this.__store__[key] = value;
+    },
+    getItem: function(key) {
+      try {
+        return this.__store__[key];
+      } catch(e) {
+        return undefined;
+      }
+    }
+  }; 
+}
+window.$db = function(key) {
+  return {
+    set: function(value) {
+      return localStorage.setItem(key, value);
+    },
+    get: function() {
+      return localStorage.getItem(key);
+    },
+    setObj: function(value) {
+      return localStorage.setItem(key, JSON.stringify(value));
+    },
+    getObj: function() {
+      var item = localStorage.getItem(key);
+      if (item) {
+        return JSON.parse(item);
+      }
+    },
+    remove: function() {
+      localStorage.removeObj(key)
+    }
+  };
+};
+
 var trans = function(type, text, amount){
 	this.type = type;
 	this.text = text;
@@ -23,6 +65,7 @@ var log = function(transaction){
 	switch(transaction.type){
 		case "deposit":
 			bank.push(transaction);
+			window.$db("deposits").setObj(bank);
 			break;
 		case "bill":
 			bills.push(transaction);
@@ -128,7 +171,6 @@ function draw(target){
 				newItem.id = "bill_" + i;
 				container.appendChild(newItem);	
 			};
-			
 		break;
 		case "expenses":
 				for(var i =0; i < expenses.length; i++){
