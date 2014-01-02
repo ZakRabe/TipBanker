@@ -44,12 +44,30 @@ var log = function(transaction){
 function inputSelect(target){
 	form = document.getElementById('form');
 	form.type.value = target;	
+	var modalTitle = document.getElementById("modalTitle");
+
+	switch(target){
+		case "deposit":
+		modalTitle.innerHTML = "Deposit Form";
+		break;
+		case "bill":
+		modalTitle.innerHTML = "Bill Form";
+		break;
+		case "expense":
+		modalTitle.innerHTML = "Expense Form";
+		break;
+	}
 }
 
-function logFromForm (form) {
+function logFromForm () {
+	var form = document.getElementById("form");
+	form = this.form;
+
 	var newTransaction = new trans(form.type.value,form.text.value, parseFloat(form.amount.value))
 	log(newTransaction);
 	document.getElementById("form").reset();
+	$('#myModal').modal('toggle');
+	draw(form.type.value + "s");
 }
 
 // Upkeep functions
@@ -62,6 +80,7 @@ var calcBalance = function(){
 		balance-=expenses[j].amount;
 	}
 	console.log("your cash balance is $" + balance);
+	draw("balance");
 };
 var calcWeekly = function(){
 	var total = 0;
@@ -82,4 +101,53 @@ function toggle_visibility (target){
 	}else{
 		target.style.display = "none";
 	}
+}
+
+function draw(target){
+	var container = document.getElementById(target);
+	container.innerHTML = "";
+	
+	switch(target){
+		case "deposits":
+			for(var i =0; i < bank.length; i++){
+				var newItem = document.createElement('li');
+				newItem.className = "list-group-item";
+				var c = bank[i];
+				var dateText = c.date.toDateString();
+				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
+				newItem.innerHTML = text;
+				newItem.id = "deposit_" + i;
+				container.appendChild(newItem);
+			};
+		break;
+		case "bills":
+			for(var i =0; i < bills.length; i++){
+				var newItem = document.createElement('li');
+				newItem.className = "list-group-item";
+				var c = bills[i];
+				var dateText = c.date.toDateString();
+				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
+				newItem.innerHTML = text;
+				newItem.id = "bill_" + i;
+				container.appendChild(newItem);
+			};
+		break;
+		case "expenses":
+				for(var i =0; i < expenses.length; i++){
+				var newItem = document.createElement('li');
+				newItem.className = "list-group-item";
+				var c = expenses[i];
+				var dateText = c.date.toDateString();
+				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
+				newItem.innerHTML = text;
+				newItem.id = "bill_" + i;
+				container.appendChild(newItem);
+			};
+		break;
+		case "balance":
+			container.innerHTML = balance;
+		break;
+	}
+
+	
 }

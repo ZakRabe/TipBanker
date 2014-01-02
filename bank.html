@@ -21,12 +21,12 @@
 	<div class="container">
 		<header class="page-header">
 			<h1>TipBanker</h1>
-			<p class="btn btn-lg btn-success">Balance <span class="badge">100</span></p>
+			<p class="btn btn-lg btn-success">Balance <span id="balance" class="badge">100</span></p>
 		</header>
 		<div class="row">
-			<button type="button" class="btn btn-success" onclick='inputSelect("deposit");'><span class="glyphicon glyphicon-import"></span> Make a Deposit</button>
-			<button type="button" class="btn btn-primary" onclick='inputSelect("bill");'><span class="glyphicon glyphicon-tags"></span> Add a Bill</button>
-			<button type="button" class="btn btn-warning" onclick='inputSelect("expense");'><span class="glyphicon glyphicon-usd"></span>Add an Expense</button>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick='inputSelect("deposit");'><span class="glyphicon glyphicon-import"></span> Make a Deposit</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick='inputSelect("bill");'><span class="glyphicon glyphicon-tags"></span> Add a Bill</button>
+			<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" onclick='inputSelect("expense");'><span class="glyphicon glyphicon-usd"></span>Add an Expense</button>
 		</div>
 		<div class="row">
 			<ul class="list-group" id="deposits">
@@ -35,14 +35,13 @@
 			<ul class="list-group" id="bills">
 				<li class="list-group-item">100 </li>
 			</ul>
-			<ul class="list-group" id="expense">
+			<ul class="list-group" id="expenses">
 				<li class="list-group-item">100 </li>
 				<li class="list-group-item">100 </li>
 			</ul>
 		</div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Launch modal</button>
+
 
 
 <!-- Modal -->
@@ -51,14 +50,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="modalTitle"></h4>
       </div>
       <div class="modal-body">
-        ...
+		<form id="form" action="" method="GET">
+    	<input type="hidden" name="type" value="">
+		<p><input type="text" class="form-control" name="text" value="" placeholder="Label">
+		<p><input type="text" class="form-control" name="amount" value="" placeholder="Amount" >
+		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" onclick="logFromForm()">Bank it!</button> 
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -73,6 +76,6 @@
 	<script type="text/javascript" src="bank.js"></script>
 	<!-- bootstrap CDN -->
 	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </body>
 </html>
