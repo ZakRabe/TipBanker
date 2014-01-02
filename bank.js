@@ -4,7 +4,7 @@ var trans = function(type, text, amount){
 	this.text = text;
 	this.amount = amount;
 	this.date = new Date();
-	if (type == "bill") {
+	if (type  == "bill") {
 		this.isPaid = false;
 	};
 };
@@ -16,6 +16,7 @@ var weekly = 0;
 var bank = [];
 var bills = [];
 var expenses = [];
+
 
 
 var log = function(transaction){
@@ -39,6 +40,7 @@ var log = function(transaction){
 			break;
 	}
 	calcBalance();
+	draw("balance");
 };
 
 function inputSelect(target){
@@ -80,7 +82,7 @@ var calcBalance = function(){
 		balance-=expenses[j].amount;
 	}
 	console.log("your cash balance is $" + balance);
-	draw("balance");
+	
 };
 var calcWeekly = function(){
 	var total = 0;
@@ -91,17 +93,6 @@ var calcWeekly = function(){
 	console.log("You must earn $" + weekly +" per week to pay your bills");
 };
 
-
-
-function toggle_visibility (target){
-	target = document.getElementById(target);
-	if(target.style.display == "none"){
-		target.style.display = "block";
-
-	}else{
-		target.style.display = "none";
-	}
-}
 
 function draw(target){
 	var container = document.getElementById(target);
@@ -119,6 +110,7 @@ function draw(target){
 				newItem.id = "deposit_" + i;
 				container.appendChild(newItem);
 			};
+			
 		break;
 		case "bills":
 			for(var i =0; i < bills.length; i++){
@@ -127,10 +119,16 @@ function draw(target){
 				var c = bills[i];
 				var dateText = c.date.toDateString();
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
+				if (!c.isPaid) {
+				text += " | <span class='glyphicon glyphicon-unchecked'></span>"
+				}else{
+					text+= " | <span class='glyphicon glyphicon-checked'></span>"
+				}
 				newItem.innerHTML = text;
 				newItem.id = "bill_" + i;
-				container.appendChild(newItem);
+				container.appendChild(newItem);	
 			};
+			
 		break;
 		case "expenses":
 				for(var i =0; i < expenses.length; i++){
@@ -149,5 +147,4 @@ function draw(target){
 		break;
 	}
 
-	
 }

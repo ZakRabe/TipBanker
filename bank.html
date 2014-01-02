@@ -13,9 +13,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-	<script>
-
-	</script>
 </head>
 <body>
 	<div class="container">
@@ -26,19 +23,23 @@
 		<div class="row">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick='inputSelect("deposit");'><span class="glyphicon glyphicon-import"></span> Make a Deposit</button>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick='inputSelect("bill");'><span class="glyphicon glyphicon-tags"></span> Add a Bill</button>
-			<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" onclick='inputSelect("expense");'><span class="glyphicon glyphicon-usd"></span>Add an Expense</button>
+			<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" onclick='inputSelect("expense");'><span class="glyphicon glyphicon-export"></span> Add an Expense</button>
 		</div>
+
 		<div class="row">
+			
+			<div class="col-md-5">
 			<ul class="list-group" id="deposits">
-				<li class="list-group-item">100 </li>
 			</ul>
+			</div>
+			<div class="col-md-5">
 			<ul class="list-group" id="bills">
-				<li class="list-group-item">100 </li>
 			</ul>
+			</div>
+			<div class="col-md-2">
 			<ul class="list-group" id="expenses">
-				<li class="list-group-item">100 </li>
-				<li class="list-group-item">100 </li>
 			</ul>
+			</div>
 		</div>
 
 
