@@ -65,7 +65,7 @@ var log = function(transaction){
 	switch(transaction.type){
 		case "deposit":
 			bank.push(transaction);
-			window.$db("deposits").setObj(bank);
+			$db("deposits").setObj(bank);
 			break;
 		case "bill":
 			bills.push(transaction);
