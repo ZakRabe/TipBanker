@@ -43,8 +43,7 @@ var log = function(transaction){
 
 function inputSelect(target){
 	form = document.getElementById('form');
-	form.type.value = target;
-	
+	form.type.value = target;	
 }
 
 function logFromForm (form) {
@@ -84,6 +83,3 @@ function toggle_visibility (target){
 		target.style.display = "none";
 	}
 }
-
-// Draw function
-//
