@@ -69,6 +69,7 @@ var log = function(transaction){
 			break;
 		case "bill":
 			bills.push(transaction);
+			$db("bills").setObj(bills);
 			break;
 		case "expense":
 			calcBalance();
@@ -76,6 +77,7 @@ var log = function(transaction){
 				console.log("Balance insufficent");
 			}else{
 				expenses.push(transaction);
+				$db("expenses").setObj(expenses);
 			}
 			break;
 		default:
@@ -147,7 +149,7 @@ function draw(target){
 				var newItem = document.createElement('li');
 				newItem.className = "list-group-item";
 				var c = bank[i];
-				var dateText = c.date.toDateString();
+				var dateText = new Date(c.date).toDateString();
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
 				newItem.innerHTML = text;
 				newItem.id = "deposit_" + i;
@@ -160,7 +162,7 @@ function draw(target){
 				var newItem = document.createElement('li');
 				newItem.className = "list-group-item";
 				var c = bills[i];
-				var dateText = c.date.toDateString();
+				var dateText = new Date(c.date).toDateString();
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
 				if (!c.isPaid) {
 				text += " | <span class='glyphicon glyphicon-unchecked'></span>"
@@ -177,7 +179,7 @@ function draw(target){
 				var newItem = document.createElement('li');
 				newItem.className = "list-group-item";
 				var c = expenses[i];
-				var dateText = c.date.toDateString();
+				var dateText = new Date(c.date).toDateString();
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
 				newItem.innerHTML = text;
 				newItem.id = "bill_" + i;
@@ -185,6 +187,7 @@ function draw(target){
 			};
 		break;
 		case "balance":
+			calcBalance();
 			container.innerHTML = balance;
 		break;
 	}

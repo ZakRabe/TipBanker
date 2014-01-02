@@ -13,7 +13,24 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    
+    <script>
+    window.onload = function(){
+	    if($db("deposits").getObj()){
+	    	bank = $db("deposits").getObj();
+	    	draw("balance");
+	   	 	draw("deposits");
+	    }
+	    if($db("bills").getObj()){
+	     	bills = $db("bills").getObj();
+	     	draw("bills");
+    	}
+    	if($db("expenses").getObj()){
+	     	expenses = $db("expenses").getObj();
+	     	draw("balance");
+	     	draw("expenses");
+    	}
+	}
+    </script>
 </head>
 <body>
 	<div class="container">
