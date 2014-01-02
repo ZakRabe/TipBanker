@@ -1,32 +1,48 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>TipBanker</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+		
 </head>
 <body>
-	<div id="container">
-		<header><h1>TipBanker</h1><div id="balance"></div></header>
-		<nav>
-			<ul>
-				<li onclick='inputSelect("deposit");'>Make a Deposit</li>
-				<li onclick='inputSelect("bill");'>Add a Bill</li>
-				<li onclick='inputSelect("expense");'>Add an Expense</li>
+	<div class="container">
+		<header class="page-header">
+			<h1>TipBanker</h1>
+			<p class="btn btn-lg btn-success">Balance <span class="badge">100</span></p>
+		</header>
+		<div class="row">
+			<button type="button" class="btn btn-success" onclick='inputSelect("deposit");'><span class="glyphicon glyphicon-import"></span> Make a Deposit</button>
+			<button type="button" class="btn btn-primary" onclick='inputSelect("bill");'><span class="glyphicon glyphicon-tags"></span> Add a Bill</button>
+			<button type="button" class="btn btn-warning" onclick='inputSelect("expense");'><span class="glyphicon glyphicon-usd"></span>Add an Expense</button>
+		</div>
+		<div class="row">
+			<ul class="list-group" id="deposits">
+				<li class="list-group-item">100 </li>
 			</ul>
-		</nav>
-		<section id="deposits"></section>
-		<section id="bills"></section>
-		<section id="expense"></section>
+			<ul class="list-group" id="bills">
+				<li class="list-group-item">100 </li>
+			</ul>
+			<ul class="list-group" id="expense">
+				<li class="list-group-item">100 </li>
+				<li class="list-group-item">100 </li>
+			</ul>
+		</div>
 	</div>
-
-	<div id="input">
-		<form id="form" action="" method="GET">
-			<input type="hidden" name="type" value="">
-			<p><label>Label:<input type="text" name="text" value=""></label>
-			<p><label>Amount:<input type="text" name="amount" value=""></label>
-			<p><button onclick="logFromForm(this.form)">Bank it!</button>
-		</form>
-	</div>
+	
+	<script type="text/javascript" src="bank.js"></script>
+	<!-- bootstrap CDN -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </body>
-<script type="text/javascript" src="bank.js"></script>
 </html>

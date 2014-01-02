@@ -44,15 +44,13 @@ var log = function(transaction){
 function inputSelect(target){
 	form = document.getElementById('form');
 	form.type.value = target;
-	toggle_visibility("input");
-
+	
 }
 
 function logFromForm (form) {
 	var newTransaction = new trans(form.type.value,form.text.value, parseFloat(form.amount.value))
 	log(newTransaction);
 	document.getElementById("form").reset();
-	toggle_visibility("input");
 }
 
 // Upkeep functions
@@ -86,3 +84,6 @@ function toggle_visibility (target){
 		target.style.display = "none";
 	}
 }
+
+// Draw function
+//
