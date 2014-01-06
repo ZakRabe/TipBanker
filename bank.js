@@ -36,9 +36,24 @@ window.$db = function(key) {
       }
     },
     remove: function() {
-      localStorage.removeObj(key)
+      localStorage.removeItem(key);
     }
   };
+};
+
+var clearIt = function(){
+	$db('bills').remove();
+	$db('deposits').remove();
+	$db('expenses').remove();
+	balance = 0;
+	weekly = 0;
+	bank = [];
+	bills = [];
+	expenses = [];
+	draw("deposits");
+	draw("bills");
+	draw("expenses");
+	draw("balance");	
 };
 
 var trans = function(type, text, amount){
@@ -162,6 +177,11 @@ function draw(target){
 				var newItem = document.createElement('li');
 				newItem.className = "list-group-item";
 				var c = bills[i];
+				if(c.isPaid){
+					newItem.className += " paid";
+				}else{
+					newItem.className += " unpaid";
+				}
 				var dateText = new Date(c.date).toDateString();
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
 				if (!c.isPaid) {
@@ -171,6 +191,7 @@ function draw(target){
 				}
 				newItem.innerHTML = text;
 				newItem.id = "bill_" + i;
+
 				container.appendChild(newItem);	
 			};
 		break;

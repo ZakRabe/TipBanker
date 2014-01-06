@@ -34,11 +34,15 @@
 </head>
 <body>
 	<div class="container">
-		<header class="page-header">
-			<h1>TipBanker</h1>
-			<p class="btn btn-lg btn-success">Balance <span id="balance" class="badge">100</span></p>
+		<header class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+			<div class="navbar-header"><a class="navbar-brand">TipBanker</a></div>
+			<div id="" class="nav navbar-nav pull-right">
+			<a class="btn btn-success">Balance <span id="balance" class="badge">100</span></a><button class ="btn btn-warning" onclick ="clearIt();">Clear</button>
+			</div>
+			</div>
 		</header>
-		<div class="button-group btn-group-justified">				
+		<div id="buttons" class="button-group btn-group-justified">				
 			<a type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick='inputSelect("deposit");'><span class="glyphicon glyphicon-import"></span> Make a Deposit</a>
 			
 			<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick='inputSelect("bill");'><span class="glyphicon glyphicon-tags"></span> Add a Bill</a>
