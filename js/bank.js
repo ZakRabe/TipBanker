@@ -56,14 +56,14 @@ var clearIt = function(){
 	draw("balance");	
 };
 
-var trans = function(type, text, amount){
+var trans = function(type, text, amount, date){
 	this.type = type;
 	this.text = text;
 	this.amount = amount;
 	this.date = new Date();
 	if (type  == "bill") {
 		this.isPaid = false;
-	};
+	}
 };
 
 
@@ -114,6 +114,7 @@ function inputSelect(target){
 		break;
 		case "bill":
 		modalTitle.innerHTML = "Bill Form";
+
 		break;
 		case "expense":
 		modalTitle.innerHTML = "Expense Form";
@@ -124,7 +125,6 @@ function inputSelect(target){
 function logFromForm () {
 	var form = document.getElementById("form");
 	form = this.form;
-
 	var newTransaction = new trans(form.type.value,form.text.value, parseFloat(form.amount.value))
 	log(newTransaction);
 	document.getElementById("form").reset();
