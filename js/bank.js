@@ -181,10 +181,21 @@ function draw(target){
 		case "bills":
 			for(var i =0; i < bills.length; i++){
 			        var c = bills[i];
+			        var now = new Date().getDate();
+			        var nowMonth = new Date().getMonth();
+			        var dueDate = new Date(c.date).getDate();
+			        var dueMonth = new Date(c.date).getMonth();
+			        var due = null;
+			        if((dueDate - now < 15) && (dueMonth !== nowMonth)){
+			        	due = false;
+			        }else{
+			        	due = true;
+			        }
+
 			        //jQuery courtesy of dave
 			        //new jQuery object newItem with plaintext of the list element
 			        var newItem = $(
-			          '<li id="bill_'+ i +'" class="list-group-item '+((c.isPaid)?'paid': 'unpaid')+'">' +
+			          '<li id="bill_'+ i +'" class="list-group-item '+((c.isPaid && !due)?'paid': 'unpaid')+'">' +
 			            c.text + ' | <span class="glyphicon glyphicon-usd"></span>' + c.amount + ' | <span class="glyphicon glyphicon-calendar"></span>: ' + (new Date(c.date)).toDateString() + '<button class="btn btn-xs pull-right" data-id="'+i+'">Pay Me!</button>' +
 			          '</li>'
 			        );
