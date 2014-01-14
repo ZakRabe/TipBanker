@@ -173,31 +173,30 @@ function draw(target){
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
 				newItem.innerHTML = text;
 				newItem.id = "deposit_" + i;
+
 				container.appendChild(newItem);
 			};
 			
 		break;
 		case "bills":
 			for(var i =0; i < bills.length; i++){
-				var newItem = document.createElement('li');
-				newItem.className = "list-group-item";
-				var c = bills[i];
-				if(c.isPaid){
-					newItem.className += " paid";
-				}else{
-					newItem.className += " unpaid";
-				}
-				var dateText = new Date(c.date).toDateString();
-				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
-				if (!c.isPaid) {
-				text += " | <span class='glyphicon glyphicon-unchecked'></span>"
-				}else{
-					text+= " | <span class='glyphicon glyphicon-checked'></span>"
-				}
-				newItem.innerHTML = text;
-				newItem.id = "bill_" + i;
-
-				container.appendChild(newItem);	
+			        var c = bills[i];
+			        //jQuery courtesy of dave
+			        //new jQuery object newItem with plaintext of the list element
+			        var newItem = $(
+			          '<li id="bill_'+ i +'" class="list-group-item '+((c.isPaid)?'paid': 'unpaid')+'">' +
+			            c.text + ' | <span class="glyphicon glyphicon-usd"></span>' + c.amount + ' | <span class="glyphicon glyphicon-calendar"></span>: ' + (new Date(c.date)).toDateString() + '<button class="btn btn-xs pull-right" data-id="'+i+'">Pay Me!</button>' +
+			          '</li>'
+			        );
+			    //in the newItem find the button element and add the click function
+				newItem.find('button').click(function(e) {
+				  e.preventDefault();
+				  // data-id attribute of the result of text.find('button'). FANTASTIC!! jQuery is da shit.
+				  payBill(bills[parseInt($(this).attr('data-id'))],parseInt($(this).attr('data-id')));
+				  return false;
+				});
+				//append newItem  to the container
+			        $(container).append(newItem);
 			};
 		break;
 		case "expenses":
@@ -218,4 +217,20 @@ function draw(target){
 		break;
 	}
 
+}
+function payBill(bill, id){
+	if(balance >= bill.amount){
+		var newExpense = new trans("expense", "Paid " + bill.text, bill.amount);
+		log(newExpense)
+		bill.isPaid = true;
+		var newDate = new Date(bill.date);
+		newDate.setMonth(newDate.getMonth()+1);
+		bill.date = new Date(newDate)
+		bills.splice(id,1,bill);
+		$db("bills").setObj(bills);
+		draw('bills');
+		draw('expenses');
+	}else{
+		alert("Not enough balance to pay this now!");
+	}
 }
