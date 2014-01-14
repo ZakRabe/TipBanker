@@ -39,7 +39,7 @@
 			<div class="container">
 			<div class="navbar-header"><a class="navbar-brand">TipBanker</a></div>
 			<div id="" class="nav navbar-nav navbar-right">
-			<a class="btn btn-success">Balance <span id="balance" class="badge">100</span></a><button class ="btn btn-warning" onclick ="clearIt();">Clear</button>
+			<a class="btn btn-success">Balance <span id="balance" class="badge"></span></a><button class ="btn btn-warning" onclick ="clearIt();">Clear</button>
 			</div>
 			</div>
 		</header>
@@ -86,9 +86,10 @@
     	<input type="hidden" name="type" value="">
 		<p><input type="text" class="form-control" name="text" value="" placeholder="Label">
 		<p><input type="text" class="form-control" name="amount" value="" placeholder="Amount" >
-		  	<div class="input-append date">
-    		<input type="text" class="span2"><span class="add-on"><i class="icon-th"></i></span>
-		    </div>
+		    <div class="input-append date" id="dp" data-date="102/2014" data-date-format="mm/dd/yyyy">
+    		<input class="datepicker" size="16" type="text" name="datepicker" value="02/2014" readonly><span class="add-on glyphicon glyphicon-calendar"></span>
+	    	
+     		</div>
 		</form>
       </div>
       <div class="modal-footer">
@@ -112,9 +113,7 @@
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script>
-	    $('.input-append.date').datepicker({
-	   		autoclose: true
-	   	});
+	    $('#dp').datepicker();
 	</script>
 
 

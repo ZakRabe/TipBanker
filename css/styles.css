@@ -32,3 +32,6 @@ hr {
 #buttons{
   margin-top: 100px;
 }
+.dropdown-menu {
+z-index: 10000 !important;
+}

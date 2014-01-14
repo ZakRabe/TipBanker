@@ -60,9 +60,12 @@ var trans = function(type, text, amount, date){
 	this.type = type;
 	this.text = text;
 	this.amount = amount;
-	this.date = new Date();
+	
 	if (type  == "bill") {
 		this.isPaid = false;
+		this.date = date;
+	}else{
+		this.date = new Date();
 	}
 };
 
@@ -111,13 +114,15 @@ function inputSelect(target){
 	switch(target){
 		case "deposit":
 		modalTitle.innerHTML = "Deposit Form";
+		document.getElementById("dp").style.display="none";
 		break;
 		case "bill":
 		modalTitle.innerHTML = "Bill Form";
-
+		document.getElementById("dp").style.display="block";
 		break;
 		case "expense":
 		modalTitle.innerHTML = "Expense Form";
+		document.getElementById("dp").style.display="none";
 		break;
 	}
 }
@@ -125,7 +130,7 @@ function inputSelect(target){
 function logFromForm () {
 	var form = document.getElementById("form");
 	form = this.form;
-	var newTransaction = new trans(form.type.value,form.text.value, parseFloat(form.amount.value))
+	var newTransaction = new trans(form.type.value,form.text.value, parseFloat(form.amount.value),form.datepicker.value)
 	log(newTransaction);
 	document.getElementById("form").reset();
 	$('#myModal').modal('toggle');
