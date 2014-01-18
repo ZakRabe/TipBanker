@@ -20,15 +20,18 @@
 	    	bank = $db("deposits").getObj();
 	    	draw("balance");
 	   	 	draw("deposits");
+	   	 	calcWeekly();
 	    }
 	    if($db("bills").getObj()){
 	     	bills = $db("bills").getObj();
 	     	draw("bills");
+	     	calcWeekly();
     	}
     	if($db("expenses").getObj()){
 	     	expenses = $db("expenses").getObj();
 	     	draw("balance");
 	     	draw("expenses");
+	     	calcWeekly();
     	}
 	};	
     </script>
