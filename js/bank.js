@@ -53,7 +53,8 @@ var clearIt = function(){
 	draw("deposits");
 	draw("bills");
 	draw("expenses");
-	draw("balance");	
+	draw("balance");
+	calcWeekly();	
 };
 
 var trans = function(type, text, amount, date){
@@ -104,6 +105,7 @@ var log = function(transaction){
 	}
 	calcBalance();
 	draw("balance");
+	calcWeekly();
 };
 
 function inputSelect(target){
@@ -156,6 +158,8 @@ var calcWeekly = function(){
 	}
 	weekly = total / 4;
 	console.log("You must earn $" + weekly +" per week to pay your bills");
+	var container = document.getElementById("weeklyBtn");
+	container.innerHTML = weekly + " /wk"
 };
 
 
