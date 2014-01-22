@@ -25,6 +25,7 @@ hr {
 }
 .paid{
   background-color: #00CC00;
+  color: white;
 }
 .unpaid{
   background-color: #FF3333;
