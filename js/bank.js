@@ -40,6 +40,13 @@ window.$db = function(key) {
     }
   };
 };
+//date prototype to return a weekNumber from the date.
+Date.prototype.getWeekNumber = function(){
+    var d = new Date(+this);
+    d.setHours(0,0,0);
+    d.setDate(d.getDate()+4-(d.getDay()||7));
+    return Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
+};
 
 var clearIt = function(){
 	$db('bills').remove();
@@ -160,6 +167,7 @@ var calcWeekly = function(){
 	console.log("You must earn $" + weekly +" per week to pay your bills");
 	var container = document.getElementById("weeklyBtn");
 	container.innerHTML = weekly + " /wk"
+
 };
 
 
@@ -177,10 +185,18 @@ function draw(target){
 				var text = c.text + " | <span class='glyphicon glyphicon-usd'></span>" + c.amount + " | <span class='glyphicon glyphicon-calendar'></span>: " + dateText;
 				newItem.innerHTML = text;
 				newItem.id = "deposit_" + i;
-
 				container.appendChild(newItem);
+				if(new Date(c.date).getWeekNumber() == new Date().getWeekNumber()){
+					weekly -= c.amount
+
+				}
 			};
-			
+			var container = document.getElementById("weeklyBtn");
+			if(weekly>=0){
+			container.innerHTML = weekly + " /wk"
+			}else{
+				container.innerHTML = "0 /wk"
+			}
 		break;
 		case "bills":
 			for(var i =0; i < bills.length; i++){

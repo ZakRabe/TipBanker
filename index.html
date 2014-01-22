@@ -18,21 +18,21 @@
     window.onload = function(){
 	    if($db("deposits").getObj()){
 	    	bank = $db("deposits").getObj();
+	    	calcWeekly();
 	    	draw("balance");
 	   	 	draw("deposits");
-	   	 	calcWeekly();
 	    }
 	    if($db("bills").getObj()){
 	     	bills = $db("bills").getObj();
-	     	draw("bills");
 	     	calcWeekly();
-    	}
+	     	draw("bills");
+	    }
     	if($db("expenses").getObj()){
 	     	expenses = $db("expenses").getObj();
+	     	calcWeekly();
 	     	draw("balance");
 	     	draw("expenses");
-	     	calcWeekly();
-    	}
+	    }
 	};	
     </script>
 </head>
