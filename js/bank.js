@@ -240,6 +240,10 @@ function draw(target){
 				newItem.innerHTML = text;
 				newItem.id = "bill_" + i;
 				container.appendChild(newItem);
+				if(new Date(c.date).getWeekNumber() == new Date().getWeekNumber()){
+					weekly += c.amount
+
+				}
 			};
 		break;
 		case "balance":
